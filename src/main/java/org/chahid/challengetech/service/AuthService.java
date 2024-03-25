@@ -13,5 +13,7 @@ public class AuthService {
     @Value("${jwt.expiration}")
     private int jwtExpiration;
 
+
+
     // Méthodes pour l'authentification et la génération de JWT
 }

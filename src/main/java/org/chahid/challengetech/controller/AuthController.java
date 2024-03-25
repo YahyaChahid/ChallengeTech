@@ -21,7 +21,7 @@ public class AuthController {
 
     @PostMapping
     public ResponseEntity<?> authenticate(@RequestBody AuthRequest request) {
-        // Implémenter l'authentification et la génération de JWT
+        
         return null;
     }
 }
