@@ -43,7 +43,10 @@ public class UserController {
             User user = new User();
             user.setFirstName(generateRandomString());
             user.setLastName(generateRandomString());
-            // Générer d'autres champs de manière aléatoire
+            user.setUsername(generateRandomString());
+            user.setEmail(generateRandomString() + "@example.com");
+            user.setPassword(generateRandomString());
+
 
             // Assigner un rôle aléatoire
             user.setRole(Math.random() < 0.5 ? "admin" : "user");
@@ -63,7 +66,7 @@ public class UserController {
         response.setContentType("application/json");
         response.setHeader("Content-Disposition", "attachment; filename=" + jsonFileName);
 
-        // Écrire le contenu du fichier JSON dans la réponse
+
         try {
             response.getWriter().write(users.toString());
             response.getWriter().flush();
@@ -81,10 +84,10 @@ public class UserController {
         }
 
         try {
-            // Convertir le fichier JSON en liste d'utilisateurs
+
             List<User> users = Arrays.asList(new ObjectMapper().readValue(file.getInputStream(), User[].class));
 
-            // Enregistrer chaque utilisateur dans la base de données
+
             userRepository.saveAll(users);
 
             return "Les utilisateurs ont été importés avec succès dans la base de données.";
@@ -118,8 +121,8 @@ public class UserController {
         return ResponseEntity.ok(userProfile);
     }
     private String generateRandomString() {
-        int leftLimit = 97; // lettre 'a'
-        int rightLimit = 122; // lettre 'z'
+        int leftLimit = 97;
+        int rightLimit = 122;
         int targetStringLength = 10;
         Random random = new Random();
 
@@ -131,4 +134,3 @@ public class UserController {
 }
 
 
-    // Autres méthodes de contrôleur pour la gestion des utilisateurs
