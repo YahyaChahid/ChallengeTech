@@ -35,7 +35,7 @@ public class UserController {
 //    public User getUserByUsername(@PathVariable String username) {
 //        return userService.getUserByUsername(username);
 //    }
-    @GetMapping("/api/users/generate")
+    @GetMapping("/generate")
     public void generateUsers(@RequestParam int count, HttpServletResponse response) {
         List<User> users = new ArrayList<>();
 
@@ -77,7 +77,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository; // Suppose que vous avez un repository pour les utilisateurs
 
-    @PostMapping("/api/users/upload")
+    @PostMapping("/upload")
     public String handleFileUpload(HttpServletRequest request, MultipartFile file) {
         if (file.isEmpty()) {
             return "Veuillez sélectionner un fichier JSON.";
@@ -96,7 +96,7 @@ public class UserController {
             return "Une erreur s'est produite lors du traitement du fichier JSON.";
         }
     }
-    @GetMapping("/api/users/me")
+    @GetMapping("/me")
     public ResponseEntity<User> getCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
         if (currentUser == null) {
@@ -105,7 +105,7 @@ public class UserController {
         return ResponseEntity.ok(currentUser);
     }
 
-    @GetMapping("/api/users/{username}")
+    @GetMapping("/{username}")
     public ResponseEntity<User> getUserProfile(@PathVariable String username, @AuthenticationPrincipal UserDetails userDetails) {
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
         if (currentUser == null) {
